@@ -23,7 +23,7 @@ class Main extends PluginBase implements Listener {
      *
      * @return null
      */
-    public function onLoad() {
+    public function onLoad() : void{
         $this->getLogger()->info(TextFormat::WHITE . "Loaded");
     }
 
@@ -32,7 +32,7 @@ class Main extends PluginBase implements Listener {
      *
      * @return null
      */
-    public function onEnable() {
+    public function onEnable() : void{
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->saveDefaultConfig();
         $this->reloadConfig();
@@ -65,7 +65,7 @@ class Main extends PluginBase implements Listener {
      * @param  array         $args    An array of arguments
      * @return boolean                True allows the command to go through, false sends an error
      */
-    public function onCommand(CommandSender $sender, Command $command, $label, array $args) {
+    public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool{
         $subcommand = strtolower(array_shift($args));
         switch ($subcommand) {
             default:
@@ -78,7 +78,7 @@ class Main extends PluginBase implements Listener {
      *
      * @return null
      */
-    public function onDisable() {
+    public function onDisable() : void{
         $this->getConfig()->save();
 
         $this->getLogger()->info(TextFormat::DARK_RED . "Disabled");
