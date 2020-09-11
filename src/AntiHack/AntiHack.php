@@ -13,15 +13,25 @@ use AntiHack\AntiHackTick;
  * calls event listener and task
  */
 class AntiHack {
+
 	/**@var array*/
-	public $hackScore = array();	
+	public $hackScore = [];	
+	/**@var array*/
+	public $players = [];
 	/** @var AntiHack */
 	static private $instance;
 	//protected
-	private function __construct() {}	
-	private function __clone() {}	
-	public function __destruct() {}
-	
+	private function __construct() {
+
+	}
+
+	private function __clone() {
+
+	}
+	public function __destruct() {
+
+	}
+
 	/**
 	 * 
 	 * implementation of singleton pattern
@@ -34,7 +44,7 @@ class AntiHack {
 		}
 		return self::$instance;
 	}
-	
+
 	/**
 	 * Enable EventKistener and Task
 	 * 
@@ -45,12 +55,12 @@ class AntiHack {
 		Server::getInstance()->getPluginManager()->registerEvents(
 			new AntiHackEventListener(), $plugin
 		);
-		
 		Server::getInstance()->getScheduler()->scheduleRepeatingTask(
 			new AntiHackTick(), 40
 		);
 		Server::getInstance()->getScheduler()->scheduleRepeatingTask(
 			new AntiHackSuspicionTick(), 20 * 60
 		);
-	}		
+	}
+
 }

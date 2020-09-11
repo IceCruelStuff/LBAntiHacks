@@ -9,6 +9,7 @@ use pocketmine\Server;
  * Make permanent checks for cheaters
  */
 class AntiHackTick extends Task {
+
 	/**@var AntiHack*/
 	private $plugin;
 	/**@var string*/
@@ -33,7 +34,7 @@ class AntiHackTick extends Task {
 	 * @param $currentTick
 	 */
 	public function onRun($currentTick) {
-		$players = Server::getInstance()->getDefaultLevel()->getPlayers();
+		$players = $this->plugin->players
 		foreach ($this->plugin->hackScore as $playerId => $data){
 			$this->plugin->hackScore[$playerId]["integral"] += $data["score"] - 1;
 			if($this->plugin->hackScore[$playerId]["integral"] < 0) {
@@ -60,9 +61,9 @@ class AntiHackTick extends Task {
 				$scoreToKick = 4;
 			}
 
-			if($players[$playerId]->hackingFlag) {
-				$scoreToKick--;
-			}
+//			if($players[$playerId]->hackingFlag) {
+//				$scoreToKick--;
+//			}
 			if(strpos($players[$playerId]->getName(), 'hack') !== false || strpos($players[$playerId]->getName(), 'hqck') !== false) {
 				$scoreToKick--;
 			}
@@ -80,4 +81,5 @@ class AntiHackTick extends Task {
 			}
 		}
 	}
+
 }
